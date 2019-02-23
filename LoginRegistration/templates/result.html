@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>LoginRegistration</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                {% with regis = get_flashed_messages(category_filter=["success"]) %}
+                    {% if regis %}
+                        {%- for msg in regis %}
+                        <p class='flash_valid'>{{ msg }}</p>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+                {% with regis = get_flashed_messages(category_filter=["logout"]) %}
+                    {% if regis %}
+                        {%- for msg in regis %}
+                        <p class='flash_error'>{{ msg }}</p>
+                        {% endfor -%}
+                    {% endif %}
+                {% endwith %}
+                <br>
+                <h1>Welcome, you've been logged in, {{fname}}!</h1>
+                <br>
+                <a href='/logout'>Logout</a>
+            </div>
+        </div>
+    </body>
+</html>

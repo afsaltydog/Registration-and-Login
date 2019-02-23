@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>LoginRegistration</title>
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>Login and Registration</h1>
+                {% with regis = get_flashed_messages(category_filter=["regis"]) %}
+                    {% if regis %}
+                    <ul>
+                        {%- for msg in regis %}
+                        <li class='flash_valid'>{{ msg }}</li>
+                        {% endfor -%}
+                    </ul>
+                    {% endif %}
+                {% endwith %}
+                {% with regis = get_flashed_messages(category_filter=["logout"]) %}
+                    {% if regis %}
+                    <ul>
+                        {%- for msg in regis %}
+                        <li class='flash_error'>{{ msg }}</li>
+                        {% endfor -%}
+                    </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class='main'>
+                <div class='box' id='leftbox'>
+                    <h2>Register Here!</h2>
+                    <form class='regisform' action="/process" method="POST">
+                        {% with errors = get_flashed_messages(category_filter=["fname"]) %}
+                            {% if errors %}
+                            <ul>
+                                {%- for msg in errors %}
+                                <li class='flash_error'>{{ msg }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <label>First Name:</label>
+                        <input type='text' name='fname' class='inputbox'>
+                        {% with errors = get_flashed_messages(category_filter=["lname"]) %}
+                            {% if errors %}
+                            <ul>
+                                {%- for msg in errors %}
+                                <li class='flash_error'>{{ msg }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <label>Last Name:</label>
+                        <input type='text' name='lname' class='inputbox'>
+                        {% with errors = get_flashed_messages(category_filter=["email"]) %}
+                            {% if errors %}
+                            <ul>
+                                {%- for msg in errors %}
+                                <li class='flash_error'>{{ msg }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <label>Email:</label>
+                        <input type='text' name='email' class='inputbox'>
+                        {% with errors = get_flashed_messages(category_filter=["pwd"]) %}
+                            {% if errors %}
+                            <ul>
+                                {%- for msg in errors %}
+                                <li class='flash_error'>{{ msg }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <label>Password:</label>
+                        <input type='password' name='password' class='inputbox'>
+                        {% with errors = get_flashed_messages(category_filter=["confirm"]) %}
+                            {% if errors %}
+                            <ul>
+                                {%- for msg in errors %}
+                                <li class='flash_error'>{{ msg }}</li>
+                                {% endfor -%}
+                            </ul>
+                            {% endif %}
+                        {% endwith %}
+                        <label>Confirm Password:</label>
+                        <input type='password' name='confirm'>
+                        <input type='submit' id='button' value='Register!'>
+                    </form>
+                </div>
+                <div class='box' id='middlebox'>
+                        <h2></h2>
+                    </div>
+                <div class='box' id='rightbox'>
+                    <h2>Login Here!</h2>
+                    <form class='loginform' action="/login" method="POST">
+                        Email: <input type='text' name='email' class='inputbox'>
+                        Password: <input type='password' name='password' class='inputbox'>
+                        <input type='submit' id='button' value='Login!'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
